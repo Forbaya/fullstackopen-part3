@@ -29,10 +29,12 @@ app.get('/api/persons', (req, res) => {
 app.get('/info', (req, res) => {
     res.set('Content-Type', 'text/plain')
 
-    const people = `Phonebook has info for ${persons.length} people
+    Person.find({}).then(persons => {
+        const info = `Phonebook has info for ${persons.length} people
 ${new Date().toString()}`
 
-    res.send(people)
+        res.send(info)
+    })
 })
 
 app.get('/api/persons/:id', (req, res, next) => {
