@@ -73,19 +73,19 @@ app.post('/api/persons', (req, res, next) => {
 
     person.save()
         .then(savedPerson => savedPerson.toJSON())
-        .then(savedAndFormattedNote => response.json(savedAndFormattedNote))
+        .then(savedAndFormattedNote => res.json(savedAndFormattedNote))
         .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
     const body = req.body
 
-    const person = {dddd
+    const person = {
         name: body.name,
         number: body.number,
     }
 
-    Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    Person.findByIdAndUpdate(req.params.id, person, { new: true, runValidators: true })
         .then(updatedPerson => {
             res.json(updatedPerson.toJSON())
         })
