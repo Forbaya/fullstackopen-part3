@@ -51,7 +51,7 @@ app.get('/api/persons/:id', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndRemove(req.params.id)
-        .then(result => {
+        .then(() => {
             res.status(204).end()
         })
         .catch(error => next(error))
@@ -93,7 +93,7 @@ app.put('/api/persons/:id', (req, res, next) => {
 })
 
 const unknownEndpoint = (req, res) => {
-    response.status(404).send({ error: 'unknown endpoint' })
+    res.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
